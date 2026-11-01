@@ -1,15 +1,29 @@
 # Git basic instructions
 
 ## CLONE FROM SCRATCH
-```git clone git@github.com:gavesako/PrateleDhammy.git```
+
+```bash
+git clone git@github.com:gavesako/PrateleDhammy.git
+```
 
 ## PUSH AFTER EDITS
-```git add . (from project root folder)
+
+*Eseguire i comandi dalla cartella radice del progetto:*
+
+```bash
+git add .
 ```
-```git commit -m "commit message"
+
+```bash
+git commit -m "commit message"
 ```
-```git push
+
+```bash
+git push
 ```
 
 ## PULL LATEST UPDATES
-```git pull```
+
+```bash
+git pull
+```
