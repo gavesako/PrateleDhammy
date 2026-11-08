@@ -125,7 +125,7 @@ function openDoc(slug){
    .catch(function(){
      if(curSlug!==slug)return;
      d.innerHTML=navigator.onLine===false
-       ?'<p class="empty">Jste offline a tento text ještě není uložen v telefonu. Uloží se automaticky, až ho otevřete s připojením k internetu.</p>'
+       ?'<p class="empty">Jste offline a tento text se ještě nestihl uložit do telefonu. Uloží se automaticky, až aplikaci spustíte s připojením k internetu.</p>'
        :'<p class="empty">Text se nepodařilo načíst. Otevřete ho na <a href="'+esc(B+FILEOF[slug])+'" target="_blank" rel="noopener">původním webu</a>.</p>'});
 }
 document.getElementById("rmark").onclick=function(){
@@ -169,6 +169,20 @@ function vShow(){document.getElementById("vtext").innerHTML="<b>"+(vi+1)+".</b> 
 /* PWA: offline cache (service worker) + install prompt */
 if("serviceWorker" in navigator&&location.protocol!=="file:"){
   window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})});
+  /* download the whole library for offline reading */
+  var off=document.getElementById("offline");
+  navigator.serviceWorker.addEventListener("message",function(e){
+    var m=e.data||{};if(m.type!=="precache-progress")return;
+    if(m.done<m.total){off.hidden=false;off.textContent="Ukládám texty pro čtení offline… "+m.done+" / "+m.total}
+    else if(m.failed&&navigator.onLine!==false){off.hidden=false;off.textContent="Uloženo "+(m.total-m.failed)+" z "+m.total+" textů pro čtení offline. Zbytek se uloží při příštím spuštění."}
+    else if(m.failed){off.hidden=false;off.textContent="Část textů se uloží, až budete online."}
+    else{off.hidden=false;off.textContent="✓ Všechny texty jsou uloženy pro čtení offline."}
+  });
+  navigator.serviceWorker.ready.then(function(reg){
+    if(navigator.storage&&navigator.storage.persist)navigator.storage.persist().catch(function(){});
+    var urls=Object.keys(HAS).map(function(s){return "texts/"+s+".html"});urls.push("texts/_search.json");
+    if(reg.active)reg.active.postMessage({type:"precache",urls:urls});
+  });
 }
 (function(){
   var box=document.getElementById("install"),btn=document.getElementById("install-btn");

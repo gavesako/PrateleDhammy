@@ -50,8 +50,8 @@
   </div>
   <div class="box ui install" id="install" hidden>
     <p class="label">Aplikace do telefonu</p>
-    <p id="install-android" hidden>Přátelé Dhammy si můžete nainstalovat jako aplikaci – texty, které otevřete, pak budou k dispozici i bez připojení.</p>
-    <p id="install-ios" hidden>Chcete-li si stránky uložit jako aplikaci: v Safari klepněte na <b>Sdílet</b> <span aria-hidden="true">⎋</span> a zvolte <b>Přidat na plochu</b>. Texty, které otevřete, pak budou k dispozici i bez připojení.</p>
+    <p id="install-android" hidden>Přátelé Dhammy si můžete nainstalovat jako aplikaci – všechny texty pak budou k dispozici i bez připojení.</p>
+    <p id="install-ios" hidden>Chcete-li si stránky uložit jako aplikaci: v Safari klepněte na <b>Sdílet</b> <span aria-hidden="true">⎋</span> a zvolte <b>Přidat na plochu</b>. Všechny texty pak budou k dispozici i bez připojení.</p>
     <div class="vbar">
       <button type="button" class="chip on" id="install-btn" hidden>Nainstalovat</button>
       <button type="button" class="chip" id="install-close">Zavřít</button>
@@ -98,6 +98,7 @@
   <input id="q" class="search" type="search" placeholder="Hledat podle autora nebo názvu" aria-label="Hledat v textech" autocomplete="off">
   <div class="chips" id="chips" role="group" aria-label="Skupina textů"></div>
   <p class="count" id="count" aria-live="polite"></p>
+  <p class="count" id="offline" hidden></p>
   <div id="list"></div>
   <div class="box ui">
     <p style="color:var(--muted)">© Přátelé Dhammy</p>

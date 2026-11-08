@@ -55,14 +55,6 @@ python3 -m http.server 8000
 
 poi aprire <http://localhost:8000>.
 
-## Pubblicare su GitHub Pages (una volta sola)
-
-1. Repository pubblico (Settings → General → Change visibility).
-2. Settings → Pages → Source: *Deploy from a branch*, Branch: `main`, cartella `/ (root)` → Save.
-3. Dopo 1–2 minuti il sito è su <https://gavesako.github.io/PrateleDhammy/>.
-
-Da lì in poi basta `git push`: il sito si aggiorna in circa un minuto.
-
 ## Installare l'app sul telefono
 
 - **Android (Chrome):** aprire il sito → "Installa app" (o menu ⋮ → "Aggiungi a schermata Home").
@@ -70,8 +62,13 @@ Da lì in poi basta `git push`: il sito si aggiorna in circa un minuto.
 
 ## Offline e aggiornamenti
 
-- L'interfaccia viene salvata al primo avvio; ogni testo viene salvato la prima volta che si apre e resta leggibile senza connessione.
-- Quando si modifica un testo, CSS o JS e si fa `git push`, i telefoni ricevono la nuova versione al successivo avvio (la vedono al secondo avvio).
+- Al primo avvio l'app scarica tutti i testi (con le loro immagini e l'indice di ricerca, circa 7 MB) e li rende leggibili senza connessione. Nella pagina "Texty" compare l'avanzamento.
+- L'elenco dei testi da scaricare viene da `HAS` in `js/data.js`: un testo nuovo aggiunto lì e in `texts/` viene scaricato dai telefoni al successivo avvio.
+- Su iPhone l'app installata sulla schermata Home ha una memoria separata da Safari: scarica i testi al suo primo avvio.
+- Non serve disinstallare l'app per aggiornarla. Dopo un `git push`:
+  - interfaccia (HTML, CSS, JS): il telefono la scarica in sottofondo al primo avvio e la mostra dall'avvio successivo;
+  - testi nuovi: scaricati al primo avvio successivo;
+  - testi modificati: il telefono ricontrolla i testi salvati una volta al giorno (scarica solo quelli cambiati).
 - Se si aggiungono/rinominano file nell'elenco `SHELL` di `sw.js`, aumentare `VERSION` in `sw.js` (es. `"v2"`).
 
 ## Cambiare l'icona
